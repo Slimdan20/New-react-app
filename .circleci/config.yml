@@ -27,8 +27,7 @@ jobs:
       - browser-tools/install-chrome
       - run: npm install
       - run: npm run build
-      - run: npm install -g @lhci/cli@0.14.x
-      - run: sudo npx lhci autorun --chrome-flags="--no-sandbox --ignore-certificate-errors" 
+      - run: npx lhci autorun --chrome-flags="--no-sandbox --ignore-certificate-errors" 
   deploy:
     # This is an example deploy job, not actually used by the workflow
     docker:
