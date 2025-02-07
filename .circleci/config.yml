@@ -26,8 +26,8 @@ jobs:
           destination: node-build
       - browser-tools/install-chrome
       - store_artifacts:
-        path: .lighthouseci
-        destination: lighthouse-report
+          path: .lighthouseci
+          destination: lighthouse-report
       - run: npm install
       - run: npm run build
       - run: npx lhci autorun --chrome-flags="--no-sandbox --ignore-certificate-errors" 
