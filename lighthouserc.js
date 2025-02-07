@@ -7,8 +7,8 @@ export const ci = {
             'categories:best-practices': 'off', 
             'categories:pwa': 'off', 
             
-             'categories:performance': ['error', { minScore: 0.8 }], 
-             'categories:accessibility': ['error', { minScore: 0.8 }], 
+             'categories:performance': ['error', { minScore: 0.9 }], 
+             'categories:accessibility': ['error', { minScore: 0.9 }], 
               },
              }, 
              upload: { 
