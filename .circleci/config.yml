@@ -4,7 +4,7 @@ version: 2.1
 orbs:
   node: circleci/node@5
   browser-tools: circleci/browser-tools@1.2.3
-  
+
 jobs:
   build-node:
     # Build node project
@@ -33,6 +33,9 @@ jobs:
       - run: 
           name: Run Lighthouse CI
           command: npx lhci autorun --chrome-flags="--no-sandbox --ignore-certificate-errors" 
+      - run:
+           name: Install Xvfb
+           command: sudo apt-get install -y xvfb
       - run: 
           name: Start Xvfb
           command: Xvfb :99 -screen 0 1920x1080x24 &
@@ -40,11 +43,8 @@ jobs:
            name: Set DISPLAY variable
            command: export DISPLAY=:99
       - run:
-           name: Install Xvfb
-           command: sudo apt-get install -y xvfb
-      - run:
         name: Run Cypress with Percy
-        command: percy exec -- cypress r
+        command: percy exec -- cypress run
 
   deploy:
     # This is an example deploy job, not actually used by the workflow
