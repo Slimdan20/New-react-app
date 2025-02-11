@@ -32,6 +32,9 @@ jobs:
       - run: 
           name: Run Lighthouse CI
           command: npx lhci autorun --chrome-flags="--no-sandbox --ignore-certificate-errors" 
+      - run:
+           name: Run Cypress tests with Percy
+           command: npx percy exec -- cypress run
   deploy:
     # This is an example deploy job, not actually used by the workflow
     docker:
