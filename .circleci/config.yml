@@ -39,7 +39,16 @@ jobs:
           background: true
       - run: 
           name: Run Lighthouse CI
-          command: npx lhci autorun --chrome-flags="--no-sandbox --ignore-certificate-errors"       
+          command: npx lhci autorun --chrome-flags="--no-sandbox --ignore-certificate-errors"  
+      - run:
+           name: Install Xvfb
+           command: sudo apt-get install -y xvfb
+      - run: 
+          name: Start Xvfb
+          command: Xvfb :99 -screen 0 1920x1080x24 &
+      - run:
+           name: Set DISPLAY variable
+           command: export DISPLAY=:99           
       - run:
            name: Install Percy CLI
            command: npm install --global @percy/cli
