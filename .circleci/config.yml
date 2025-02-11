@@ -43,8 +43,8 @@ jobs:
            name: Set DISPLAY variable
            command: export DISPLAY=:99
       - run:
-        name: Run Cypress with Percy
-        command: percy exec -- cypress run
+           name: Run Cypress with Percy
+           command: percy exec -- cypress run
 
   deploy:
     # This is an example deploy job, not actually used by the workflow
