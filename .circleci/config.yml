@@ -7,8 +7,7 @@ orbs:
 jobs:
   build-node:
     # Build node project
-    docker:
-      - image: cypress/included:12.7.0
+    executor: node/default
     steps:
       - checkout
       - node/install-packages:
@@ -44,7 +43,7 @@ jobs:
            command: sudo apt-get install -y xvfb
       - run:
         name: Run Cypress with Percy
-        command: percy exec -- cypress run
+        command: percy exec -- cypress r
 
   deploy:
     # This is an example deploy job, not actually used by the workflow
