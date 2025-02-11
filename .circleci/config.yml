@@ -54,7 +54,7 @@ jobs:
            command: npm install --global @percy/cli
       - run:
            name: Run Cypress with Percy
-           command: percy exec -- cypress run
+           command: npx percy exec -- npx cypress run
 
   deploy:
     # This is an example deploy job, not actually used by the workflow
