@@ -43,6 +43,9 @@ jobs:
            name: Set DISPLAY variable
            command: export DISPLAY=:99
       - run:
+           name: Install Percy CLI
+           command: npm install --global @percy/cli
+      - run:
            name: Run Cypress with Percy
            command: percy exec -- cypress run
 
