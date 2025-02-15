@@ -55,59 +55,26 @@ jobs:
       - run:
            name: Run Cypress with Percy
            command: npx percy exec -- npx cypress run
-  preview_deployment:
-    docker:
-      - image: circleci/node:latest
-    environment:
-      VERCEL_ORG_ID: $VERCEL_ORG_ID
-      VERCEL_PROJECT_ID: $VERCEL_PROJECT_ID
+  deploy:
+    executor: node/default
     steps:
       - checkout
       - run:
-          name: Install Vercel CLI
-          command: npm install vercel@latest
+           name: Install Vercel CLI
+           command: npm install vercel@latest
       - run:
-          name: Pull Vercel Environment Information
-          command: npx vercel pull --yes --environment=preview --token=$VERCEL_TOKEN
-      - run:
-          name: Build Project Artifacts
-          command: npx vercel build --token=$VERCEL_TOKEN
-      - run:
-          name: Deploy Project Artifacts to Vercel
-          command: npx vercel deploy --prebuilt --token=$VERCEL_TOKEN
-
-  production_deployment:
-    docker:
-      - image: circleci/node:latest
-    environment:
-      VERCEL_ORG_ID: $VERCEL_ORG_ID
-      VERCEL_PROJECT_ID: $VERCEL_PROJECT_ID
-    steps:
-      - checkout
-      - run:
-          name: Install Vercel CLI
-          command: npm install vercel@latest
-      - run:
-          name: Pull Vercel Environment Information
-          command: npx vercel pull --yes --environment=production --token=$VERCEL_TOKEN
-      - run:
-          name: Build Project Artifacts
-          command: npx vercel build --prod --token=$VERCEL_TOKEN
-      - run:
-          name: Deploy Project Artifacts to Vercel
-          command: npx vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN
-
+           command: vercel --token $VERCEL_TOKEN --prod
+  
 workflows:
   version: 2
   preview_and_production:
     jobs:
-      - preview_deployment:
+      - build-node
+      - deploy:
+          requires:
+            - build-node
           filters:
             branches:
-              ignore: /main/
-      - production_deployment:
-          filters:
-            branches:
-              only: /main/
+              only: main
 
   
