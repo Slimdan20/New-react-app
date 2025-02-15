@@ -61,9 +61,9 @@ jobs:
       - checkout
       - run:
            name: Install Vercel CLI
-           command: npm install vercel@latest
+           command: npm install vercel
       - run:
-           command: vercel --token $VERCEL_TOKEN --prod
+           command: npx vercel --token $VERCEL_TOKEN --prod
   
 workflows:
   version: 2
