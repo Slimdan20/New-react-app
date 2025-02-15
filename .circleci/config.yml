@@ -63,7 +63,7 @@ jobs:
            name: Install Vercel CLI
            command: npm install vercel
       - run:
-           command: npx vercel --token $VERCEL_TOKEN --prod
+           command: npx vercel --token $VERCEL_TOKEN --prod --yes
   
 workflows:
   version: 2
