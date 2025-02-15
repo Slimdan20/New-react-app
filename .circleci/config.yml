@@ -7,7 +7,7 @@ orbs:
 
 jobs:
   build-node:
-    # Build node project
+    # Build node project work
     executor: node/default
     steps:
       - checkout
