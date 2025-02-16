@@ -7,8 +7,8 @@ orbs:
 
 jobs:
   build-node:
-    # Build node project work
-    executor: node/default
+    docker:
+      - image: cypress/included:12.17.1
     steps:
       - checkout
       - node/install-packages:
@@ -39,16 +39,7 @@ jobs:
           background: true
       - run: 
           name: Run Lighthouse CI
-          command: npx lhci autorun --chrome-flags="--no-sandbox --ignore-certificate-errors"  
-      - run:
-           name: Install Xvfb
-           command: sudo apt-get install -y xvfb
-      - run: 
-          name: Start Xvfb
-          command: Xvfb :99 -screen 0 1920x1080x24 &
-      - run:
-           name: Set DISPLAY variable
-           command: export DISPLAY=:99           
+          command: npx lhci autorun --chrome-flags="--no-sandbox --ignore-certificate-errors"         
       - run:
            name: Install Percy CLI
            command: npm install --global @percy/cli
